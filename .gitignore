@@ -1,0 +1,12 @@
+geotrellis
+.vagrant
+
+*.pyc
+*~
+
+.galaxy_install_info
+
+deploy/roles/*
+!deploy/roles/geotrellis
+
+*.pem

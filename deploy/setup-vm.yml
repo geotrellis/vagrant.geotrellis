@@ -1,0 +1,18 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: yes
+
+
+  vars:
+    java_version: "7u75-2.5.4-1~trusty1"
+
+  pre_tasks:
+    - name: Update APT cache
+      apt: update_cache=yes
+  
+  roles:
+    - { "role": "azavea.java" }
+    - { "role": "azavea.git" }
+    - { "role": "azavea.spark", "spark_version": "1.2.0+cdh5.3.1+365-1.cdh5.3.1.p0.17~trusty-cdh5.3.1" }
+    - { "role": "geotrellis" }

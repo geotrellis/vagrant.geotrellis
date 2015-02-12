@@ -1,0 +1,14 @@
+---
+- name: Update the .bashrc to set SPARK_HOME
+  lineinfile:
+    dest=/home/vagrant/.bashrc
+    line="export SPARK_HOME=/usr/lib/spark"
+    regexp="export SPARK_HOME=/usr/lib/spark"
+    owner=vagrant
+    state=present
+    insertafter=EOF
+    create=True
+
+- name: Checkout geotrellis
+  sudo: no
+  git: repo={{ geotrellis_git_url }} version={{ geotrellis_git_branch }} dest={{ geotrellis_git_path }} 

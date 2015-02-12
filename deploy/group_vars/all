@@ -1,0 +1,9 @@
+---
+prefix: /usr/local
+local_lib_path: /usr/local/lib
+
+home_path: /home/vagrant
+
+geotrellis_git_path: /vagrant/geotrellis
+geotrellis_git_branch: master
+geotrellis_git_url: https://github.com/geotrellis/geotrellis.git
