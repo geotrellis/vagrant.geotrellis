@@ -1,0 +1,4 @@
+---
+accumulo_secret: "secret"
+accumulo_leader_host: "localhost"
+accumulo_instance_name: "geotrellis-accumulo-cluster"

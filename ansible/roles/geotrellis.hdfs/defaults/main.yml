@@ -1,0 +1,19 @@
+---
+hdfs_version: "2.5.0+cdh5.3.*"
+hdfs_conf_dir: "/etc/hadoop/conf"
+hdfs_namenode: False
+hdfs_namenode_host: localhost
+hdfs_namenode_port: 8020
+hdfs_disks: []
+
+hdfs_namenode_dir: "/usr/local/hadoop_store/hdfs/namenode"
+hdfs_datanode_dir: "/usr/local/hadoop_store/hdfs/datanode"
+
+hdfs_core_properties:
+  - { name: "fs.defaultFS",
+      value: "hdfs://{{ hdfs_namenode_host }}:{{ hdfs_namenode_port }}" }
+
+hdfs_node_properties:
+  - { name: "dfs.permissions.superusergroup", value: "hadoop" }
+  - { name: "dfs.namenode.name.dir", value: "{{ hdfs_namenode_dir }}" }
+  - { name: "dfs.datanode.data.dir", value: "{{ hdfs_datanode_dir }}" }

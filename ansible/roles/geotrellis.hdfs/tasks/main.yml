@@ -1,0 +1,55 @@
+---
+- name: Configure Cloudera APT key
+  apt_key: url="http://archive.cloudera.com/cdh5/ubuntu/{{ ansible_distribution_release }}/amd64/cdh/archive.key"
+           state=present
+
+- name: Configure the Cloudera APT repositories
+  apt_repository: repo="deb [arch=amd64] http://archive.cloudera.com/cdh5/ubuntu/{{ ansible_distribution_release }}/amd64/cdh {{ ansible_distribution_release }}-cdh5 contrib"
+                  state=present
+
+- name: Pin Cloudera APT repositories
+  template: src=cdh5.j2 dest=/etc/apt/preferences.d/cdh5
+
+- name: Install Hadoop HDFS
+  apt: pkg=hadoop-hdfs=2.5.0+cdh5.3.*
+
+- name: Install Hadoop HDFS NameNode
+  apt: pkg=hadoop-hdfs-namenode={{ hdfs_version }}
+       state=present
+
+- name: Install Hadoop HDFS DataNode
+  apt: pkg=hadoop-hdfs-datanode={{ hdfs_version }}
+       state=present
+
+- name: Configure HDFS
+  template: src={{ item }}.xml.j2 dest={{ hdfs_conf_dir }}/{{ item }}.xml
+  with_items:
+    - core-site
+    - hdfs-site
+
+- name: Create Hadoop HDFS Data Directories
+  file: path={{ item }}
+        owner=hdfs
+        group=hdfs
+        state=directory
+  register: created_hdfs_data_dirs
+  with_items:
+    - "{{ hdfs_namenode_dir }}"
+    - "{{ hdfs_datanode_dir }}"
+
+- name: Format HDFS NameNode data directories
+  sudo_user: hdfs
+  command: "hdfs namenode -format"
+  when: created_hdfs_data_dirs | changed
+
+- name: Add Vagrant user to HDFS supergroup
+  user: name=vagrant
+        append=yes
+        group=hadoop
+        state=present
+
+- name: Enable and start the Hadoop HDFS NameNode service
+  service: name=hadoop-hdfs-namenode enabled=yes state=started
+
+- name: Enable and start the Hadoop HDFS DataNode service
+  service: name=hadoop-hdfs-datanode enabled=yes state=started

@@ -7,3 +7,11 @@ home_path: /home/vagrant
 geotrellis_git_path: /vagrant/geotrellis
 geotrellis_git_branch: master
 geotrellis_git_url: https://github.com/geotrellis/geotrellis.git
+
+spark_version: "1.2.0+cdh5.3.1+365-1.cdh5.3.1.p0.17~trusty-cdh5.3.1"
+
+accumulo_secret: "secret"
+accumulo_leader_host: "localhost"
+accumulo_instance_name: "geotrellis-accumulo-cluster"
+
+java_version: "7u75-2.5.4*"

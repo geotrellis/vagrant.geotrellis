@@ -1,5 +1,0 @@
-azavea.java,0.1.0
-azavea.git,0.1.0
-azavea.spark,0.1.1
-
-
