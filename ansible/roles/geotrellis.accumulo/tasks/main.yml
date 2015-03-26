@@ -35,9 +35,16 @@
         dest="{{ accumulo_conf_dir }}/masters"
         mode=0644
 
+- name: Check if accumulo has been initialized
+  command: "hdfs dfs -test -d /accumulo"
+  register: hdfs_files
+  ignore_errors: yes
+
+
 - name: Initialize Accumulo Leader
   sudo_user: accumulo
   command: "accumulo init --instance-name {{ accumulo_instance_name }} --password {{ accumulo_secret }}"
+  when: "hdfs_files.rc == 1"
 
 - name: Restart Accumulo Server
   service: name={{ item }} enabled=yes state=started
