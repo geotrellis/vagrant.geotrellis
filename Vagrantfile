@@ -67,14 +67,14 @@ Vagrant.configure("2") do |config|
     # Set up synced folders
     synced_folder_type = ENV.fetch('VAGRANT_GEOTRELLIS_SYNC', nil)
     if synced_folder_type == "nfs"
-      worker.vm.synced_folder ".", "/home/vagrant", type: "nfs"
+      worker.vm.synced_folder ".", "/vagrant", type: "nfs"
     elsif synced_folder_type == "rsync"
-      worker.vm.synced_folder ".", "/home/vagrant",
+      worker.vm.synced_folder ".", "/vagrant",
                               type: "rsync",
-                              rsync__exclude: ["--verbose", "--archive", "-z", "--copy-links"],
-                              rsync__args: ["geotrellis/.git/"]
+                              rsync__exclude: ["geotrellis/.git/"],
+                              rsync__args: ["--verbose", "--archive", "-z", "--copy-links"]
     else
-      worker.vm.synced_folder "geotrellis/", "/home/vagrant/geotrellis/"
+      worker.vm.synced_folder ".", "/vagrant"
     end
 
     # Ansible provisioning
