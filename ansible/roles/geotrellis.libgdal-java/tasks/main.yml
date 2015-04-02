@@ -1,0 +1,10 @@
+---
+- name: Update the .bashrc to set JAVA_GDAL_DIR so that GeoTrellis can find GDAL bindings
+  lineinfile:
+    dest=/etc/environment
+    line="export JAVA_GDAL_DIR=/usr/lib/jni"
+    regexp="export JAVA_GDAL_DIR=/usr/lib/jni"
+    owner=vagrant
+    state=present
+    insertafter=EOF
+    create=True

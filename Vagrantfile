@@ -55,13 +55,13 @@ Vagrant.configure("2") do |config|
 
     # VirtualBox settings
     worker.vm.provider :virtualbox do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "3048"]
+      vb.customize ["modifyvm", :id, "--memory", "5120"]
       vb.cpus = 8
     end
 
     # Settings for KVM/libvirt
     config.vm.provider :libvirt do |domain|
-      domain.memory = 3048
+      domain.memory = 5120
     end
 
     # Set up synced folders

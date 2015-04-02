@@ -1,7 +1,7 @@
 ---
 - name: Update the .bashrc to set SPARK_HOME
   lineinfile:
-    dest=/home/vagrant/.bashrc
+    dest=/etc/environment
     line="export SPARK_HOME=/usr/lib/spark"
     regexp="export SPARK_HOME=/usr/lib/spark"
     owner=vagrant
