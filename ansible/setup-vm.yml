@@ -14,3 +14,4 @@
     - { "role": "geotrellis.spark" }
     - { "role": "geotrellis.hdfs" }
     - { "role": "geotrellis.accumulo" }
+    - { "role": "geotrellis.libgdal-java" }

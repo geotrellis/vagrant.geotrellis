@@ -4,3 +4,4 @@ azavea.spark,0.1.1
 azavea.zookeeper,0.3.0
 azavea.accumulo,0.1.0
 azavea.hdfs,0.4.1
+azavea.libgdal-java,0.1.0
