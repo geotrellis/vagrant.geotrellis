@@ -1,5 +1,6 @@
 ---
-hdfs_version: "2.5.0+cdh5.3.*"
+hdfs_version: "2.6.0+cdh5.4.*"
+hdfs_cloudera_distribution: "cdh5.4"
 hdfs_conf_dir: "/etc/hadoop/conf"
 hdfs_namenode: False
 hdfs_namenode_host: localhost
