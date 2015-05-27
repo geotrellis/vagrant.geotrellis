@@ -11,6 +11,7 @@
     - { "role": "azavea.java" }
     - { "role": "azavea.git" }
     - { "role": "azavea.zookeeper" }
+    - { "role": "azavea.spark" }
     - { "role": "geotrellis.spark" }
     - { "role": "geotrellis.hdfs" }
     - { "role": "geotrellis.accumulo" }

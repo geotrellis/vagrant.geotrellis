@@ -86,3 +86,26 @@ Your host machine should have at least 6GB of memory, a modern x86-64 processor,
    vagrant ssh
    cd /home/vagrant/geotrellis/
    ```
+
+11. In order to run a program using geotrellis on spark you will need to create an assembly (fat jar) of the project like so:
+
+   ```
+   cd geotrellis
+   sbt "project spark" assembly
+   ```
+
+   You can use `spark-submit` on the vagrant machine to start a spark job:
+
+   ```
+   spark-submit \
+   --class geotrellis.spark.ingest.AccumuloIngestCommand \
+   --master local[4] \
+   --driver-memory 1G \
+   --driver-library-path /usr/local/lib \
+   /vagrant/geotrellis/spark/target/scala-2.10/geotrellis-spark-assembly-0.10.0-SNAPSHOT.jar \
+   --input s3a://$AWS_ACCESS_KEY:$AWS_SECRET_KEY@geotrellis-test/nlcd-geotiff \
+   --instance geotrellis-accumulo-cluster --user root --password secret --zookeeper localhost \
+   --table tiles --layerName NLCD
+   ```
+
+   __Note__: You may need to specify `fs.s3a.access.key` and `fs.s3a.secret.key` in `hdfs-site.xml` if your secret key includes `/`;
